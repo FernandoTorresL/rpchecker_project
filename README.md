@@ -12,17 +12,26 @@ Follow the tutorial [Build a Site Connectivity Checker in Python](https://realpy
 
 ## Installation
 
+1. Create a Python virtual environment
+
 OS X & Linux:
 
 ```sh
-
+$ python -m venv ./venv
+$ source venv/bin/activate
+(venv) $
 ```
+> This prompt may vary if you use another shell configuration, like pk10
 
 Windows:
-
+WIP
 ```sh
 
 ```
+
+2. Install the requirements
+
+WIP
 
 ## Usage example
 
