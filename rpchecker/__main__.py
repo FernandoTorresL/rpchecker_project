@@ -1,7 +1,10 @@
+"""This module provides the RP Checker entry point script."""
+
+import asyncio
 import pathlib
 import sys
 
-from rpchecker.checker import site_is_online
+from rpchecker.checker import site_is_online, site_is_online_async
 from rpchecker.cli import display_check_result, read_user_cli_args
 
 
@@ -12,7 +15,11 @@ def main():
     if not urls:
         print("Error: no URLs to check", file=sys.stderr)
         sys.exit(1)
-    _synchronous_check(urls)
+
+    if user_args.asynchronous:
+        asyncio.run(_asynchronous_check(urls))
+    else:
+        _synchronous_check(urls)
 
 
 def _get_websites_urls(user_args):
@@ -33,6 +40,19 @@ def _read_urls_from_file(file):
     else:
         print("Error: input file not found", file=sys.stderr)
     return []
+
+
+async def _asynchronous_check(urls):
+    async def _check(url):
+        error = ""
+        try:
+            result = await site_is_online_async(url)
+        except Exception as e:
+            result = False
+            error = str(e)
+        display_check_result(result, url, error)
+
+    await asyncio.gather(*(_check(url) for url in urls))
 
 
 def _synchronous_check(urls):
