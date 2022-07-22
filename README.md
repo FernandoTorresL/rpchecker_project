@@ -21,11 +21,27 @@ $ python -m venv ./venv
 $ source venv/bin/activate
 (venv) $
 ```
+
+Windows:
+
+```sh
+$ python -m venv venv
+$ .\venv\Scripts\activate
+(venv) $
+```
 > This prompt may vary if you use another shell configuration, like pk10
+
+Later, to deactivate the virtual environment
+OS X & Linux & Windows:
+
+```sh
+(venv) $ deactivate
+$
+```
 
 2. Install the requirements
 
-OS X & Linux:
+OS X & Linux & Windows:
 
 ```sh
 (venv) $ python -m pip install -r requirements.txt
