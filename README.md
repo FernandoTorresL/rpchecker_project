@@ -8,7 +8,7 @@
 
 Follow the tutorial [Build a Site Connectivity Checker in Python](https://realpython.com/site-connectivity-checker-python/) from [Real Python site](https://realpython.com)
 
-![](header.png)
+
 
 ## Installation
 
@@ -23,35 +23,99 @@ $ source venv/bin/activate
 ```
 > This prompt may vary if you use another shell configuration, like pk10
 
-Windows:
-WIP
-```sh
-
-```
-
 2. Install the requirements
 
-WIP
-
-## Usage example
-
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
-
-_For more examples and usage, please refer to the [Wiki][wiki]._
-
-## Development setup
-
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
+OS X & Linux:
 
 ```sh
-
+(venv) $ python -m pip install -r requirements.txt
 ```
 
+## Run the project
+
+```sh
+(venv) $ python -m rpchecker -u python.org
+The status of "python.org" is: "Online!" 👍
+```
+### Features
+
+RP Checker provides the following options:
+
+- `-u` or `--urls` takes one or more URLs and checks if they're online.
+- `-f` or `--input-file` takes a file containing a list of URLs to check.
+- `-a` or `--asynchronous` runs the check asynchronously.
+
+Show the help message
+```sh
+(venv) $ python -m rpchecker -h
+usage: rpchecker [-h] [-u URLs [URLs ...]] [-f FILE] [-a]
+
+check the availability of websites
+
+options:
+  -h, --help            show this help message and exit
+  -u URLs [URLs ...], --urls URLs [URLs ...]
+                        enter one or more website URLs
+  -f FILE, --input-file FILE
+                        read URLs from a file
+  -a, --asynchronous    run the connectivity check asynchronously
+```
+
+Check some urls
+```sh
+(venv) $ python -m rpchecker -u python.org pypi.org peps.python.org
+The status of "python.org" is: "Online!" 👍
+The status of "pypi.org" is: "Online!" 👍
+The status of "peps.python.org" is: "Online!"👍
+```
+
+Results from a non existing site
+```sh
+(venv) $ python -m rpchecker --urls non-existing-site.org
+The status of "non-existing-site.org" is: "Offline?" 👎
+  Error: "[Errno 8] nodename nor servname provided, or not known"
+```
+
+Using a txt file with a list of urls
+```sh
+(venv) $ python -m rpchecker -f sample-urls.txt
+The status of "python.org" is: "Online!" 👍
+The status of "pypi.org" is: "Online!" 👍
+The status of "docs.python.org" is: "Online!" 👍
+The status of "peps.python.org" is: "Online!" 👍
+```
+
+Checking the sites asynchronously
+```sh
+(venv) $ python -m rpchecker -u python.org pypi.org peps.python.org -a
+The status of "pypi.org" is: "Online!" 👍
+The status of "python.org" is: "Online!" 👍
+The status of "peps.python.org" is: "Online!"
+```
+
+### What learn with this project
+
+- Create **command-line interfaces (CLI)** in Python with **argparse**
+- Check if a website is online using Python’s **http.client**
+- Run **synchronous** checks on multiple websites
+- Check if a website is online using **aiohttp**
+- Check the connectivity of multiple websites **asynchronously**
+
+## About the original author
+
+Leodanis Pozo Ramos - Email: leodanis@realpython.com
 ## Release History
 
 * 0.0.1
-    * Work in progress
+    * Project ready with asynchronous requests
 
+## Contributing
+
+1. Fork it (<https://github.com/FernandoTorresL/rpchecker_project/fork>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
 ## Meta
 
 <div align="center">
@@ -61,16 +125,3 @@ Describe how to install all development dependencies and how to run an automated
 </div>
 
 #### :globe_with_meridians: [Twitter](https://twitter.com/FerTorresMx), [Instagram](https://www.instagram.com/fertorresmx/): @fertorresmx
-
-Distributed under the XYZ license. See ``LICENSE`` for more information.
-
-## Contributing
-
-1. Fork it (<https://github.com/FernandoTorresL/rpchecker_project/fork>)
-2. Create your feature branch (`git checkout -b feature/fooBar`)
-3. Commit your changes (`git commit -am 'Add some fooBar'`)
-4. Push to the branch (`git push origin feature/fooBar`)
-5. Create a new Pull Request
-
-<!-- Markdown link & img dfn's -->
-[wiki]: https://github.com/yourname/yourproject/wiki
