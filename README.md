@@ -25,7 +25,7 @@ $ source venv/bin/activate
 With python3 already installed you can use:
 
 ```sh
-$ python3 -m venv ./venv
+$ python3 -m venv venv
 $ source venv/bin/activate
 (venv) $
 ```
